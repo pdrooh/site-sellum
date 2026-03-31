@@ -1,0 +1,72 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4D82FF" stop-opacity="0.95"/>
+      <stop offset="0.5" stop-color="#2A3DD6" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#161BA9" stop-opacity="0.88"/>
+    </linearGradient>
+    <filter id="soft" x="-120" y="-120" width="1680" height="1140" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="30" result="b"/>
+      <feColorMatrix in="b" type="matrix"
+        values="1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 0.45 0" />
+    </filter>
+  </defs>
+
+  <rect width="1440" height="900" fill="#000"/>
+  <g filter="url(#soft)">
+    <circle cx="520" cy="220" r="190" fill="#161BA9" fill-opacity="0.22"/>
+    <circle cx="1020" cy="560" r="240" fill="#2A3DD6" fill-opacity="0.14"/>
+  </g>
+
+  <rect x="170" y="150" width="1100" height="600" rx="22" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.10)"/>
+  <rect x="170" y="150" width="1100" height="64" rx="22" fill="rgba(0,0,0,0.35)"/>
+  <rect x="210" y="176" width="220" height="12" rx="6" fill="rgba(255,255,255,0.10)"/>
+
+  <g opacity="0.9">
+    <rect x="230" y="260" width="260" height="140" rx="14" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)"/>
+    <rect x="230" y="430" width="260" height="140" rx="14" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)"/>
+    <rect x="230" y="600" width="260" height="90" rx="14" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)"/>
+
+    <rect x="260" y="292" width="140" height="12" rx="6" fill="rgba(255,255,255,0.10)"/>
+    <rect x="260" y="320" width="200" height="10" rx="5" fill="rgba(255,255,255,0.07)"/>
+    <rect x="260" y="462" width="120" height="12" rx="6" fill="rgba(255,255,255,0.10)"/>
+    <rect x="260" y="490" width="210" height="10" rx="5" fill="rgba(255,255,255,0.07)"/>
+    <rect x="260" y="632" width="160" height="12" rx="6" fill="rgba(255,255,255,0.10)"/>
+  </g>
+
+  <g>
+    <rect x="560" y="292" width="630" height="398" rx="16" fill="rgba(0,0,0,0.35)" stroke="rgba(255,255,255,0.08)"/>
+    <rect x="600" y="330" width="240" height="12" rx="6" fill="rgba(255,255,255,0.10)"/>
+    <rect x="600" y="354" width="340" height="10" rx="5" fill="rgba(255,255,255,0.07)"/>
+
+    <g transform="translate(600 410)">
+      <rect x="0" y="0" width="170" height="56" rx="14" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)"/>
+      <rect x="200" y="0" width="170" height="56" rx="14" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)"/>
+      <rect x="400" y="0" width="170" height="56" rx="14" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)"/>
+
+      <rect x="18" y="18" width="52" height="20" rx="10" fill="url(#accent)"/>
+      <rect x="218" y="18" width="62" height="20" rx="10" fill="url(#accent)" fill-opacity="0.85"/>
+      <rect x="418" y="18" width="58" height="20" rx="10" fill="url(#accent)" fill-opacity="0.7"/>
+
+      <path d="M170 28H200" stroke="rgba(255,255,255,0.12)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M370 28H400" stroke="rgba(255,255,255,0.12)" stroke-width="2" stroke-linecap="round"/>
+
+      <circle cx="170" cy="28" r="3" fill="#4D82FF"/>
+      <circle cx="200" cy="28" r="3" fill="#4D82FF"/>
+      <circle cx="370" cy="28" r="3" fill="#2A3DD6"/>
+      <circle cx="400" cy="28" r="3" fill="#2A3DD6"/>
+    </g>
+
+    <g transform="translate(600 520)">
+      <rect x="0" y="0" width="570" height="140" rx="16" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)"/>
+      <rect x="24" y="26" width="220" height="12" rx="6" fill="rgba(255,255,255,0.09)"/>
+      <rect x="24" y="52" width="320" height="10" rx="5" fill="rgba(255,255,255,0.07)"/>
+      <rect x="24" y="84" width="520" height="34" rx="12" fill="rgba(0,0,0,0.32)" stroke="rgba(255,255,255,0.07)"/>
+      <rect x="40" y="94" width="250" height="10" rx="5" fill="rgba(255,255,255,0.08)"/>
+    </g>
+  </g>
+</svg>
+
