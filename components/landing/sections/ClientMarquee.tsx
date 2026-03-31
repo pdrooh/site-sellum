@@ -19,11 +19,6 @@ export function ClientMarquee() {
   return (
     <section aria-label="Clientes" className="border-t border-white/[0.06] py-10 sm:py-12">
       <div className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 opacity-80" aria-hidden>
-          <div className="absolute -left-24 top-1/2 h-64 w-64 -translate-y-1/2 rounded-full bg-[#161BA9]/10 blur-[110px]" />
-          <div className="absolute -right-28 top-1/2 h-64 w-64 -translate-y-1/2 rounded-full bg-[#2a3dd6]/08 blur-[110px]" />
-        </div>
-
         <div
           className="relative"
           style={{

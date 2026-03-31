@@ -17,7 +17,7 @@ export function ProductsSection() {
         <FadeIn>
           <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
             <div>
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#4d82ff]">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#3948ff]">
                 Produtos
               </p>
               <h2 className="mt-4 text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
@@ -30,7 +30,7 @@ export function ProductsSection() {
               <ul className="mt-8 space-y-2">
                 {bullets.map((b) => (
                   <li key={b} className="flex items-start gap-3 text-sm leading-relaxed text-white/70">
-                    <span className="mt-1 inline-block h-2 w-2 shrink-0 rounded-full bg-[#4d82ff]" aria-hidden />
+                    <span className="mt-1 inline-block h-2 w-2 shrink-0 rounded-full bg-[#3948ff]" aria-hidden />
                     <span>{b}</span>
                   </li>
                 ))}
@@ -47,8 +47,7 @@ export function ProductsSection() {
             </div>
 
             <div className="relative">
-              <div className="pointer-events-none absolute -inset-8 bg-[radial-gradient(circle_at_35%_15%,rgba(22,27,169,0.22),transparent_55%)]" />
-              <div className="relative overflow-hidden border border-white/[0.10] bg-white/[0.02] p-3 shadow-[0_0_0_1px_rgba(255,255,255,0.05),0_30px_80px_-60px_rgba(22,27,169,0.75)] sm:p-4">
+              <div className="relative overflow-hidden border border-white/[0.10] bg-white/[0.02] p-3 shadow-[0_0_0_1px_rgba(255,255,255,0.05)] sm:p-4">
                 <Image
                   src="/images/mocks/sellum-integrations.svg"
                   alt="Integrações e visão de produto (mock)"

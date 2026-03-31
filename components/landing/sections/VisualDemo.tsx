@@ -9,7 +9,7 @@ export function VisualDemo() {
         <FadeIn>
           <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
             <div>
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#4d82ff]">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#3948ff]">
                 Demonstração visual
               </p>
               <h2 className="mt-4 text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
@@ -29,7 +29,6 @@ export function VisualDemo() {
             </div>
 
             <div className="relative">
-              <div className="pointer-events-none absolute -inset-8 bg-[radial-gradient(circle_at_30%_20%,rgba(22,27,169,0.22),transparent_55%)]" />
               <div className="relative overflow-hidden border border-white/[0.08] bg-white/[0.02] p-5 sm:p-6">
                 <div className="flex items-center justify-between gap-3">
                   <p className="text-xs font-semibold uppercase tracking-wider text-white/60">
@@ -54,13 +53,13 @@ export function VisualDemo() {
                 <div className="mt-4 border border-white/[0.06] bg-black/35 p-4">
                   <div className="flex items-center justify-between">
                     <p className="text-[11px] font-semibold uppercase tracking-wider text-white/55">Pipeline</p>
-                    <p className="text-[11px] font-medium text-[#4d82ff]">latência 12ms</p>
+                    <p className="text-[11px] font-medium text-[#3948ff]">latência 12ms</p>
                   </div>
                   <div className="mt-3 grid grid-cols-12 gap-1">
                     {[9, 7, 10, 6, 8, 11, 7, 9, 6, 10, 8, 9].map((h, i) => (
                       <div
                         key={i}
-                        className="col-span-1 rounded-[8px] bg-gradient-to-t from-[#161BA9] via-[#2a3dd6] to-[#4d82ff]/85"
+                        className="col-span-1 rounded-[8px] bg-[#3948ff]/85"
                         style={{ height: `${h * 6}px` }}
                       />
                     ))}

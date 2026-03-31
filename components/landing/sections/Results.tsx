@@ -18,10 +18,10 @@ function Sparkline({ points }: { points: number[] }) {
     .join(' ')
   return (
     <svg viewBox={`0 0 ${w} ${h}`} className="h-14 w-full" aria-hidden>
-      <path d={d} fill="none" stroke="rgba(77,130,255,0.65)" strokeWidth="2.2" />
+      <path d={d} fill="none" stroke="rgba(57,72,255,0.70)" strokeWidth="2.2" />
       <path
         d={`${d} L${w - pad} ${h - pad} L${pad} ${h - pad} Z`}
-        fill="rgba(22,27,169,0.10)"
+        fill="rgba(57,72,255,0.10)"
       />
     </svg>
   )
@@ -48,9 +48,6 @@ export function Results() {
           <div className="grid gap-10 lg:grid-cols-3 lg:gap-0">
             <FadeIn delay={0.1}>
               <div className="group relative px-2 py-2 sm:px-6 sm:py-6 lg:pr-10">
-                <div className="pointer-events-none absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100" aria-hidden>
-                  <div className="absolute left-1/2 top-8 h-44 w-[22rem] -translate-x-1/2 rounded-full bg-[#161BA9]/08 blur-[110px]" />
-                </div>
                 <div className="relative">
                   <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/25">Conversão</p>
                   <div className="mt-4 flex items-baseline justify-between gap-6">
@@ -68,9 +65,6 @@ export function Results() {
 
             <FadeIn delay={0.16}>
               <div className="group relative px-2 py-2 sm:px-6 sm:py-6 lg:border-l lg:border-white/[0.06] lg:px-10">
-                <div className="pointer-events-none absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100" aria-hidden>
-                  <div className="absolute left-1/2 top-8 h-44 w-[22rem] -translate-x-1/2 rounded-full bg-[#2a3dd6]/07 blur-[110px]" />
-                </div>
                 <div className="relative">
                   <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/25">Ciclo</p>
                   <p className="mt-4 text-5xl font-semibold tracking-tight text-white">−9d</p>
@@ -90,7 +84,7 @@ export function Results() {
                         </div>
                         <div className="h-[6px] w-full overflow-hidden rounded-[999px] bg-white/10">
                           <div
-                            className="h-full rounded-[999px] bg-gradient-to-r from-[#161BA9] via-[#2a3dd6] to-[#4d82ff]"
+                            className="h-full rounded-[999px] bg-[#3948ff]"
                             style={{ width: `${v}%` }}
                           />
                         </div>
@@ -103,9 +97,6 @@ export function Results() {
 
             <FadeIn delay={0.22}>
               <div className="group relative px-2 py-2 sm:px-6 sm:py-6 lg:border-l lg:border-white/[0.06] lg:pl-10">
-                <div className="pointer-events-none absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100" aria-hidden>
-                  <div className="absolute left-1/2 top-8 h-44 w-[22rem] -translate-x-1/2 rounded-full bg-[#161BA9]/08 blur-[110px]" />
-                </div>
                 <div className="relative">
                   <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/25">Forecast</p>
                   <div className="mt-4 flex items-end justify-between gap-6">
@@ -119,7 +110,7 @@ export function Results() {
                       {[28, 40, 34, 52, 48, 62, 58, 66, 64, 72, 70, 78].map((h, i) => (
                         <div
                           key={i}
-                          className="col-span-1 rounded-[6px] bg-gradient-to-t from-[#161BA9] via-[#2a3dd6] to-[#4d82ff]/90"
+                          className="col-span-1 rounded-[6px] bg-[#3948ff]/90"
                           style={{ height: `${h * 0.55}px` }}
                         />
                       ))}

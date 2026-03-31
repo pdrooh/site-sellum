@@ -61,7 +61,7 @@ export function Header() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-[background,border-color,backdrop-filter] duration-200 ${
         solid || open
-          ? 'border-b border-white/[0.06] bg-black/85 backdrop-blur-xl backdrop-saturate-150'
+          ? 'border-b border-white/[0.06] bg-[#1c1c1c]/88 backdrop-blur-xl backdrop-saturate-150'
           : 'border-b border-transparent bg-transparent'
       }`}
     >

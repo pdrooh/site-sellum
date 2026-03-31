@@ -6,15 +6,7 @@ import { m, useReducedMotion } from 'framer-motion'
 function ProductVisual() {
   return (
     <div className="relative">
-      <div
-        className="pointer-events-none absolute -inset-10 opacity-60"
-        aria-hidden
-      >
-        <div className="absolute -top-12 left-1/2 h-64 w-[34rem] -translate-x-1/2 rounded-full bg-[#161BA9]/20 blur-[120px]" />
-        <div className="absolute -bottom-16 right-0 h-64 w-64 rounded-full bg-[#2a3dd6]/12 blur-[120px]" />
-      </div>
-
-      <div className="relative overflow-hidden border border-white/[0.10] bg-white/[0.02] p-3 shadow-[0_0_0_1px_rgba(255,255,255,0.05),0_30px_80px_-60px_rgba(22,27,169,0.75)] sm:p-4">
+      <div className="relative overflow-hidden border border-white/[0.10] bg-white/[0.02] p-3 shadow-[0_0_0_1px_rgba(255,255,255,0.05)] sm:p-4">
         <Image
           src="/images/mocks/sellum-dashboard.svg"
           alt="Dashboard Sellum (mock)"
@@ -55,11 +47,6 @@ export function Hero() {
 
   return (
     <section className="relative overflow-hidden pt-[calc(8.25rem+env(safe-area-inset-top,0px))] pb-16 sm:pt-32 sm:pb-20 lg:pt-32 lg:pb-24">
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <div className="absolute -top-52 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-[#161BA9]/16 blur-[130px]" />
-        <div className="absolute -right-52 top-0 h-[30rem] w-[30rem] rounded-full bg-[#2a3dd6]/10 blur-[130px]" />
-      </div>
-
       <div className="relative z-[1] mx-auto max-w-7xl px-4 lg:px-8">
         <m.div
           variants={container}
@@ -73,7 +60,7 @@ export function Hero() {
           >
             A plataforma comercial para operar B2B
             <br className="hidden sm:block" />
-            com previsibilidade
+
           </m.h1>
 
           <m.p
