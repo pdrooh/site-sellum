@@ -91,7 +91,7 @@ const items = [
 
 export function ValueProps() {
   return (
-    <section className="py-16 sm:py-20">
+    <section className="bg-black py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
         <FadeIn>
           <h2 className="max-w-4xl text-balance text-3xl font-semibold leading-[1.08] tracking-tight text-white sm:text-4xl">

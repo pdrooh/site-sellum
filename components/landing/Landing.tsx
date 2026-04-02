@@ -5,6 +5,7 @@ import { Header } from './sections/Header'
 import { Hero } from './sections/Hero'
 import { ClientMarquee } from './sections/ClientMarquee'
 import { ValueProps } from './sections/ValueProps'
+import { LandingDeepAtmosphere } from './LandingDeepAtmosphere'
 import { OpsShowcase } from './sections/OpsShowcase'
 import { Results } from './sections/Results'
 import { NativeErps } from './sections/NativeErps'
@@ -33,17 +34,22 @@ export function Landing() {
           </a>
           <Header />
           <main id="conteudo-principal" className="relative z-[1]" tabIndex={-1}>
-            <Hero />
-            <ClientMarquee />
+            {/* Altura mínima = 1 tela menos o header: hero + marquee visíveis; ValueProps só após scroll */}
+            <div className="flex min-h-[calc(100dvh-5rem)] flex-col bg-black">
+              <Hero />
+              <ClientMarquee />
+            </div>
             <ValueProps />
-            <OpsShowcase />
-            <Results />
-            <NativeErps />
-            <Cases />
-            <Pricing />
-            <FinalCta />
+            <LandingDeepAtmosphere>
+              <OpsShowcase />
+              <Results />
+              <NativeErps />
+              <Cases />
+              <Pricing />
+              <FinalCta />
+              <Footer />
+            </LandingDeepAtmosphere>
           </main>
-          <Footer />
         </div>
       </MotionConfig>
     </LazyMotion>

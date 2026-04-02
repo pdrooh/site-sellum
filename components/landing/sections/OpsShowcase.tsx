@@ -22,18 +22,25 @@ export function OpsShowcase() {
         </div>
 
         <FadeIn delay={0.1} className="mt-10 sm:mt-12">
-          <div className="relative overflow-hidden border border-white/[0.10] bg-white/[0.02] p-3 shadow-[0_0_0_1px_rgba(255,255,255,0.05),0_30px_80px_-60px_rgba(22,27,169,0.75)] sm:p-4">
-            <div className="pointer-events-none absolute inset-0 opacity-70" aria-hidden>
-              <div className="absolute -left-24 top-1/2 h-64 w-64 -translate-y-1/2 rounded-full bg-[#161BA9]/12 blur-[110px]" />
-              <div className="absolute -right-24 top-1/2 h-64 w-64 -translate-y-1/2 rounded-full bg-[#2a3dd6]/08 blur-[110px]" />
-            </div>
+          <div
+            className="relative overflow-hidden"
+            style={{
+              maskImage:
+                'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%), linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)',
+              WebkitMaskImage:
+                'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%), linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)',
+              maskComposite: 'intersect',
+              WebkitMaskComposite: 'source-in',
+            }}
+          >
             <Image
-              src="/images/mocks/sellum-ops-feed.svg"
-              alt="Operações e automações (mock)"
-              width={1440}
-              height={900}
-              className="relative h-auto w-full select-none"
+              src="/images/hero/ops-dashboard.jpg"
+              alt="Interface de gestão: cupons e operações comerciais"
+              width={1024}
+              height={335}
+              className="h-auto w-full select-none"
               loading="lazy"
+              sizes="(min-width: 1280px) 1216px, 100vw"
             />
           </div>
         </FadeIn>
@@ -41,4 +48,3 @@ export function OpsShowcase() {
     </section>
   )
 }
-

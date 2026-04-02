@@ -7,6 +7,9 @@ import { useEffect, useId, useRef, useState } from 'react'
 
 const dashboardUrl = process.env.NEXT_PUBLIC_DASHBOARD_URL ?? '#'
 
+const ctaClassName =
+  'inline-flex items-center justify-center rounded-[8px] bg-[#161BA9] font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] transition hover:brightness-110 active:brightness-95'
+
 const primaryLinks = [
   { href: '/produtos', label: 'Produtos' },
   { href: '/planos', label: 'Planos' },
@@ -59,9 +62,9 @@ export function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-[background,border-color,backdrop-filter] duration-200 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300 ease-out ${
         solid || open
-          ? 'border-b border-white/[0.06] bg-[#1c1c1c]/88 backdrop-blur-xl backdrop-saturate-150'
+          ? 'border-b border-white/[0.08] bg-black/58 backdrop-blur-2xl backdrop-saturate-[1.65] [box-shadow:inset_0_-1px_0_rgba(255,255,255,0.04)] supports-[backdrop-filter]:bg-black/48'
           : 'border-b border-transparent bg-transparent'
       }`}
     >
@@ -102,7 +105,7 @@ export function Header() {
             </Link>
 
             <div className="invisible absolute left-0 top-full z-50 mt-2 min-w-[220px] translate-y-1 opacity-0 transition duration-150 ease-out [filter:drop-shadow(0_20px_60px_rgba(0,0,0,0.6))] group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
-              <div className="overflow-hidden rounded-[8px] border border-white/[0.08] bg-black/85 backdrop-blur-xl backdrop-saturate-150">
+              <div className="overflow-hidden rounded-[8px] border border-white/[0.08] bg-black/72 backdrop-blur-2xl backdrop-saturate-[1.55]">
                 <div className="px-2 py-2">
                   {resourceLinks.map((l) => (
                     <Link
@@ -126,20 +129,17 @@ export function Header() {
           >
             Log in
           </Link>
-          <Link
-            href="/demonstracao"
-            className="inline-flex h-9 items-center justify-center rounded-[8px] bg-white px-3.5 text-[13px] font-semibold text-black transition hover:bg-white/90"
-          >
-            Sign up
+          <Link href="/demonstracao" className={`${ctaClassName} h-9 px-3.5 text-[13px]`}>
+            Solicitar demonstração
           </Link>
         </nav>
 
         <div className="flex items-center gap-2 lg:hidden">
           <Link
             href="/demonstracao"
-            className="inline-flex h-10 items-center justify-center rounded-[8px] bg-white px-3 text-xs font-semibold text-black transition hover:bg-white/90"
+            className={`${ctaClassName} h-10 max-w-[9.5rem] px-2.5 text-center text-[10px] font-semibold leading-tight sm:max-w-none sm:px-3 sm:text-xs`}
           >
-            Sign up
+            Solicitar demonstração
           </Link>
           <button
             ref={menuBtnRef}
@@ -253,8 +253,12 @@ export function Header() {
                 <Link href={dashboardUrl} className="btn-secondary w-full justify-center" onClick={() => setOpen(false)}>
                   Log in
                 </Link>
-                <Link href="/demonstracao" className="btn-primary w-full justify-center" onClick={() => setOpen(false)}>
-                  Sign up
+                <Link
+                  href="/demonstracao"
+                  className={`${ctaClassName} min-h-[48px] w-full justify-center px-4 text-sm`}
+                  onClick={() => setOpen(false)}
+                >
+                  Solicitar demonstração
                 </Link>
               </div>
             </m.nav>

@@ -17,7 +17,7 @@ const clients = [
 
 export function ClientMarquee() {
   return (
-    <section aria-label="Clientes" className="border-t border-white/[0.06] py-10 sm:py-12">
+    <section aria-label="Clientes" className="bg-black py-10 sm:py-12">
       <div className="relative overflow-hidden">
         <div
           className="relative"
