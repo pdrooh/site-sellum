@@ -1,0 +1,90 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4D82FF" stop-opacity="0.95"/>
+      <stop offset="0.55" stop-color="#2A3DD6" stop-opacity="0.90"/>
+      <stop offset="1" stop-color="#161BA9" stop-opacity="0.86"/>
+    </linearGradient>
+    <filter id="soft" x="-140" y="-140" width="1720" height="1180" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="34" result="b"/>
+      <feColorMatrix in="b" type="matrix"
+        values="1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 0.45 0"/>
+    </filter>
+  </defs>
+
+  <rect width="1440" height="900" fill="#000"/>
+  <g filter="url(#soft)">
+    <circle cx="520" cy="190" r="220" fill="#161BA9" fill-opacity="0.18"/>
+    <circle cx="1140" cy="260" r="260" fill="#2A3DD6" fill-opacity="0.12"/>
+    <circle cx="980" cy="820" r="320" fill="#161BA9" fill-opacity="0.10"/>
+  </g>
+
+  <rect x="140" y="120" width="1160" height="660" rx="24" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.10)"/>
+  <rect x="140" y="120" width="1160" height="64" rx="24" fill="rgba(0,0,0,0.35)"/>
+  <circle cx="182" cy="152" r="6" fill="rgba(255,95,86,0.85)"/>
+  <circle cx="202" cy="152" r="6" fill="rgba(255,189,46,0.85)"/>
+  <circle cx="222" cy="152" r="6" fill="rgba(39,201,63,0.85)"/>
+
+  <rect x="175" y="210" width="360" height="540" rx="18" fill="rgba(0,0,0,0.38)" stroke="rgba(255,255,255,0.08)"/>
+  <rect x="210" y="246" width="220" height="12" rx="6" fill="rgba(255,255,255,0.10)"/>
+  <rect x="210" y="270" width="260" height="10" rx="5" fill="rgba(255,255,255,0.07)"/>
+
+  <g>
+    <rect x="210" y="310" width="290" height="118" rx="16" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.07)"/>
+    <circle cx="236" cy="340" r="10" fill="rgba(255,255,255,0.10)"/>
+    <rect x="256" y="332" width="160" height="10" rx="5" fill="rgba(255,255,255,0.09)"/>
+    <rect x="256" y="354" width="210" height="10" rx="5" fill="rgba(255,255,255,0.06)"/>
+    <rect x="256" y="386" width="180" height="10" rx="5" fill="rgba(255,255,255,0.06)"/>
+    <rect x="210" y="420" width="290" height="1" fill="rgba(255,255,255,0.06)"/>
+  </g>
+
+  <g>
+    <rect x="210" y="448" width="290" height="118" rx="16" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.07)"/>
+    <circle cx="236" cy="478" r="10" fill="rgba(255,255,255,0.10)"/>
+    <rect x="256" y="470" width="140" height="10" rx="5" fill="rgba(255,255,255,0.09)"/>
+    <rect x="256" y="492" width="220" height="10" rx="5" fill="rgba(255,255,255,0.06)"/>
+    <rect x="256" y="524" width="170" height="10" rx="5" fill="rgba(255,255,255,0.06)"/>
+  </g>
+
+  <g>
+    <rect x="210" y="586" width="290" height="134" rx="16" fill="rgba(0,0,0,0.32)" stroke="rgba(255,255,255,0.07)"/>
+    <rect x="234" y="612" width="210" height="12" rx="6" fill="rgba(255,255,255,0.08)"/>
+    <rect x="234" y="640" width="240" height="40" rx="14" fill="rgba(0,0,0,0.35)" stroke="rgba(255,255,255,0.08)"/>
+    <rect x="250" y="654" width="150" height="12" rx="6" fill="rgba(255,255,255,0.07)"/>
+    <rect x="414" y="640" width="60" height="40" rx="14" fill="url(#accent)" fill-opacity="0.9"/>
+    <path d="M442 664l10 7" stroke="rgba(255,255,255,0.85)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M442 671l-10 7" stroke="rgba(255,255,255,0.85)" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <rect x="565" y="210" width="700" height="540" rx="18" fill="rgba(0,0,0,0.38)" stroke="rgba(255,255,255,0.08)"/>
+  <rect x="600" y="246" width="270" height="12" rx="6" fill="rgba(255,255,255,0.10)"/>
+  <rect x="600" y="270" width="320" height="10" rx="5" fill="rgba(255,255,255,0.07)"/>
+
+  <g opacity="0.95">
+    <rect x="600" y="318" width="630" height="120" rx="16" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)"/>
+    <rect x="626" y="346" width="170" height="10" rx="5" fill="rgba(255,255,255,0.08)"/>
+    <rect x="626" y="368" width="240" height="10" rx="5" fill="rgba(255,255,255,0.06)"/>
+    <rect x="1126" y="340" width="84" height="34" rx="12" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)"/>
+    <rect x="1142" y="352" width="52" height="10" rx="5" fill="rgba(255,255,255,0.07)"/>
+  </g>
+
+  <g opacity="0.95">
+    <rect x="600" y="454" width="630" height="120" rx="16" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)"/>
+    <rect x="626" y="482" width="220" height="10" rx="5" fill="rgba(255,255,255,0.08)"/>
+    <rect x="626" y="504" width="280" height="10" rx="5" fill="rgba(255,255,255,0.06)"/>
+    <rect x="1112" y="476" width="98" height="34" rx="12" fill="url(#accent)" fill-opacity="0.9"/>
+    <rect x="1130" y="488" width="62" height="10" rx="5" fill="rgba(255,255,255,0.85)"/>
+  </g>
+
+  <g opacity="0.95">
+    <rect x="600" y="590" width="630" height="140" rx="16" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.06)"/>
+    <rect x="626" y="618" width="200" height="10" rx="5" fill="rgba(255,255,255,0.08)"/>
+    <rect x="626" y="640" width="300" height="10" rx="5" fill="rgba(255,255,255,0.06)"/>
+    <rect x="626" y="674" width="580" height="34" rx="12" fill="rgba(0,0,0,0.34)" stroke="rgba(255,255,255,0.08)"/>
+    <rect x="644" y="686" width="260" height="10" rx="5" fill="rgba(255,255,255,0.07)"/>
+  </g>
+</svg>
+
