@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+/* Sellum – dark premium + bordas/foco iguais ao sellum-system */
+@theme inline {
+  --font-sans: var(--font-red-hat);
+
+  --color-sellum-bg: #000000;
+  --color-sellum-primary: #161ba9;
+  --color-sellum-primary-mid: #2a3dd6;
+  --color-sellum-primary-soft: #4d82ff;
+
+  --radius-sellum: 8px;
+
+  /* Paridade com sellum-system (dark) */
+  --app-border: rgba(255, 255, 255, 0.08);
+  --app-hover: rgba(255, 255, 255, 0.05);
+  --app-input-focus-border-dark: rgba(255, 255, 255, 0.36);
+  --shadow-focus-ring: 0 0 0 4px rgba(42, 61, 214, 0.12);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--color-sellum-bg);
+  color: rgba(255, 255, 255, 0.92);
+  font-family: var(--font-red-hat), system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+::selection {
+  background-color: rgba(22, 27, 169, 0.35);
+  color: #fff;
+}
+
+/* 8px em tudo que tem borda/rounded */
+:where([class*='border'], [class*='rounded-']) {
+  border-radius: var(--radius-sellum) !important;
+}
+
+/* Botões (estilo do sellum-system: hover suave + ring no foco) */
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold text-white transition;
+  border-radius: var(--radius-sellum);
+  background: linear-gradient(180deg, #1a22c2 0%, var(--color-sellum-primary) 55%, #0f147a 100%);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+    0 14px 44px -14px rgba(22, 27, 169, 0.55),
+    0 0 40px -16px rgba(22, 27, 169, 0.35);
+}
+.btn-primary:hover {
+  filter: brightness(1.08);
+}
+.btn-primary:active {
+  transform: translateY(0.5px);
+}
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-medium text-white transition;
+  border-radius: var(--radius-sellum);
+  border: 1px solid color-mix(in srgb, var(--color-sellum-primary-mid) 30%, transparent);
+  background: rgba(255, 255, 255, 0.02);
+}
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: color-mix(in srgb, var(--color-sellum-primary-mid) 45%, transparent);
+}
+.btn-primary,
+.btn-secondary {
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, filter;
+}
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus-ring), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+}
+
+/* Inputs – mesmo modelo do sellum-system */
+:where(input, textarea, select) {
+  border: 1px solid var(--app-border);
+  background: #000;
+  color: rgba(255, 255, 255, 0.92);
+}
+:where(input, textarea, select)::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+:where(input, textarea, select):focus-visible {
+  outline: none;
+  border-color: var(--app-input-focus-border-dark);
+  box-shadow: var(--shadow-focus-ring);
+}
+
+/* Micro-textura “Linear-like” (discreta) */
+.page-atmosphere {
+  position: relative;
+  isolation: isolate;
+}
+.page-atmosphere::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.06;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.page-atmosphere::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: transparent;
+  opacity: 0;
+}
+
+/* Continuidade com o restante da página: preto; brilho azul mínimo só por profundidade */
+.landing-deep-atmosphere__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 95% 55% at 50% 0%, rgba(22, 27, 169, 0.07) 0%, transparent 52%),
+    #000000;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse 70% 55% at 50% 20%,
+    transparent 0%,
+    rgba(0, 0, 0, 0.52) 72%,
+    rgba(0, 0, 0, 0.78) 100%
+  );
+  opacity: 0.78;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary,
+  .btn-secondary {
+    transition-duration: 0ms;
+  }
+}
+
+.radius-12 {
+  border-radius: 12px !important;
+}
+
