@@ -41,8 +41,8 @@ function digitCountBeforeCaret(value: string, caret: number): number {
 
 function caretAfterDigitIndex(formatted: string, targetDigits: number): number {
   if (targetDigits <= 0) {
-    const i = formatted.indexOf('(')
-    return i >= 0 ? i + 1 : formatted.length
+    if (formatted.startsWith('(')) return 1
+    return 0
   }
   let seen = 0
   for (let i = 0; i < formatted.length; i++) {
@@ -54,33 +54,30 @@ function caretAfterDigitIndex(formatted: string, targetDigits: number): number {
   return formatted.length
 }
 
-/** Máscara visual BR: +55 (DD) 9XXXX-XXXX (celular) ou +55 (DD) XXXX-XXXX (fixo). */
-function formatWhatsAppBR(raw: string): string {
+/** DDD (2) + número: celular 9XXXX-XXXX, fixo XXXX-XXXX. Remove 55 do início só para exibir (opcional). */
+function formatPhoneBRDDD(raw: string): string {
   let d = raw.replace(/\D/g, '')
-  if (d.startsWith('55')) d = d.slice(2)
+  if (d.startsWith('55') && d.length >= 12) d = d.slice(2)
   d = d.slice(0, 11)
   if (d.length === 0) return ''
-  if (d.length <= 2) return `+55 (${d}`
+  if (d.length <= 2) return `(${d}`
   const ddd = d.slice(0, 2)
   const rest = d.slice(2)
-  if (rest.length === 0) return `+55 (${ddd}) `
+  if (rest.length === 0) return `(${ddd})`
   const mobile = rest[0] === '9'
   const maxLocal = mobile ? 9 : 8
   const r = rest.slice(0, maxLocal)
-  if (r.length === 0) return `+55 (${ddd}) `
   if (mobile) {
-    if (r.length <= 5) return `+55 (${ddd}) ${r}`
-    return `+55 (${ddd}) ${r.slice(0, 5)}-${r.slice(5)}`
+    if (r.length <= 5) return `(${ddd}) ${r}`
+    return `(${ddd}) ${r.slice(0, 5)}-${r.slice(5)}`
   }
-  if (r.length <= 4) return `+55 (${ddd}) ${r}`
-  return `+55 (${ddd}) ${r.slice(0, 4)}-${r.slice(4)}`
+  if (r.length <= 4) return `(${ddd}) ${r}`
+  return `(${ddd}) ${r.slice(0, 4)}-${r.slice(4)}`
 }
 
-function normalizeWhatsApp(value: string) {
-  const digits = value.replace(/\D/g, '')
-  if (!digits) return ''
-  if (digits.startsWith('55')) return `+${digits}`
-  return `+55${digits}`
+/** Só dígitos para o CRM (sem +55 automático); preserva 55 se o usuário digitou com código do país. */
+function normalizePhoneForSubmit(value: string): string {
+  return value.replace(/\D/g, '').slice(0, 15)
 }
 
 export function DemoScheduler() {
@@ -125,7 +122,7 @@ export function DemoScheduler() {
         body: JSON.stringify({
           fullName: form.fullName.trim(),
           email: form.email.trim(),
-          whatsapp: normalizeWhatsApp(form.whatsapp),
+          whatsapp: normalizePhoneForSubmit(form.whatsapp),
           company: form.company.trim(),
           source: 'landing',
         }),
@@ -226,14 +223,14 @@ export function DemoScheduler() {
                   onChange={(e) => {
                     const el = e.target
                     const before = digitCountBeforeCaret(el.value, el.selectionStart ?? 0)
-                    const formatted = formatWhatsAppBR(el.value)
+                    const formatted = formatPhoneBRDDD(el.value)
                     whatsappCaret.current = caretAfterDigitIndex(formatted, before)
                     setForm((s) => ({ ...s, whatsapp: formatted }))
                   }}
                   className={`${INPUT_CLASS} tabular-nums tracking-tight`}
-                  placeholder="+55 (11) 98765-4321"
+                  placeholder="(11) 98765-4321"
                   required
-                  maxLength={20}
+                  maxLength={16}
                 />
               </div>
 

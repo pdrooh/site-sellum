@@ -34,7 +34,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, message: 'Informe a empresa.' }, { status: 400 })
   }
   if (whatsapp.replace(/\D/g, '').length < 10) {
-    return NextResponse.json({ ok: false, message: 'Informe um WhatsApp válido.' }, { status: 400 })
+    return NextResponse.json({ ok: false, message: 'Informe um WhatsApp válido com DDD.' }, { status: 400 })
   }
 
   const webhookUrl = process.env.CLINT_WEBHOOK_URL?.trim()
