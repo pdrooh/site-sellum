@@ -47,7 +47,9 @@ export function Footer() {
             <div className="space-y-3">
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/40">Resources</p>
               <nav className="grid gap-2 text-sm text-white/55">
+                <Link href="/blog" className="transition hover:text-white">Blog</Link>
                 <Link href="/academy" className="transition hover:text-white">Academy</Link>
+                <Link href="/ajuda" className="transition hover:text-white">Central de Ajuda</Link>
               </nav>
             </div>
 

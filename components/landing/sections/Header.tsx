@@ -14,6 +14,7 @@ const primaryLinks = [
   { href: '/produtos', label: 'Produtos' },
   { href: '/planos', label: 'Planos' },
   { href: '/demonstracao', label: 'Demonstração' },
+  { href: '/blog', label: 'Blog' },
   { href: '/recursos', label: 'Recursos' },
   { href: '/contato', label: 'Contato' },
 ] as const
@@ -21,6 +22,7 @@ const primaryLinks = [
 const resourceLinks = [
   { href: '/api', label: 'API' },
   { href: '/academy', label: 'Academy' },
+  { href: '/ajuda', label: 'Central de Ajuda' },
   { href: '/partners', label: 'Partners' },
 ] as const
 

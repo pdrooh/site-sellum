@@ -164,3 +164,11 @@ body::before {
   border-radius: 12px !important;
 }
 
+.radius-10 {
+  border-radius: 10px !important;
+}
+
+.radius-14 {
+  border-radius: 14px !important;
+}
+
