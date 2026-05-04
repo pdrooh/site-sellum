@@ -2,8 +2,9 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { AnimatePresence, m } from 'framer-motion'
+import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion'
 import { useEffect, useId, useRef, useState } from 'react'
+import { ThemeToggle } from '@/components/theme/ThemeToggle'
 
 const dashboardUrl = process.env.NEXT_PUBLIC_DASHBOARD_URL ?? '#'
 
@@ -23,6 +24,7 @@ const resourceLinks = [
   { href: '/api', label: 'API' },
   { href: '/academy', label: 'Academy' },
   { href: '/ajuda', label: 'Central de Ajuda' },
+  { href: '/comparativo', label: 'Comparativo' },
   { href: '/partners', label: 'Partners' },
 ] as const
 
@@ -63,6 +65,7 @@ export function Header() {
   }, [open])
 
   return (
+    <LazyMotion features={domAnimation} strict>
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300 ease-out ${
         solid || open
@@ -77,7 +80,7 @@ export function Header() {
             alt="Sellum"
             width={120}
             height={28}
-            className="h-6 w-auto opacity-95 sm:h-7"
+            className="theme-logo h-6 w-auto opacity-95 sm:h-7"
             priority
           />
         </Link>
@@ -131,7 +134,10 @@ export function Header() {
           >
             Log in
           </Link>
-          <Link href="/demonstracao" className={`${ctaClassName} h-9 px-3.5 text-[13px]`}>
+          <ThemeToggle
+            className="inline-flex h-9 w-9 items-center justify-center rounded-[8px] border border-white/[0.10] bg-white/[0.02] text-white/75 transition hover:bg-white/[0.05] hover:text-white focus-visible:outline-none focus-visible:[box-shadow:var(--shadow-focus-ring)]"
+          />
+          <Link href="/demonstracao" className={`${ctaClassName} theme-on-primary h-9 px-3.5 text-[13px]`}>
             Solicitar demonstração
           </Link>
         </nav>
@@ -139,10 +145,11 @@ export function Header() {
         <div className="flex items-center gap-2 lg:hidden">
           <Link
             href="/demonstracao"
-            className={`${ctaClassName} h-10 max-w-[9.5rem] px-2.5 text-center text-[10px] font-semibold leading-tight sm:max-w-none sm:px-3 sm:text-xs`}
+            className={`${ctaClassName} theme-on-primary h-10 max-w-[9.5rem] px-2.5 text-center text-[10px] font-semibold leading-tight sm:max-w-none sm:px-3 sm:text-xs`}
           >
             Solicitar demonstração
           </Link>
+          <ThemeToggle className="btn-secondary h-11 w-11 !px-0 !py-0 text-white/80" />
           <button
             ref={menuBtnRef}
             type="button"
@@ -151,7 +158,7 @@ export function Header() {
             aria-controls="mobile-nav"
             aria-haspopup="dialog"
             aria-labelledby={titleId}
-            onClick={() => setOpen(true)}
+            onClick={() => setOpen((v) => !v)}
           >
             <span id={titleId} className="sr-only">
               Abrir menu
@@ -181,7 +188,7 @@ export function Header() {
         {open && (
           <m.div
             key="mobile-root"
-            className="fixed inset-0 z-[60] bg-black lg:hidden"
+            className="fixed inset-0 z-[200] bg-black lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -257,7 +264,7 @@ export function Header() {
                 </Link>
                 <Link
                   href="/demonstracao"
-                  className={`${ctaClassName} min-h-[48px] w-full justify-center px-4 text-sm`}
+                  className={`${ctaClassName} theme-on-primary min-h-[48px] w-full justify-center px-4 text-sm`}
                   onClick={() => setOpen(false)}
                 >
                   Solicitar demonstração
@@ -268,6 +275,7 @@ export function Header() {
         )}
       </AnimatePresence>
     </header>
+    </LazyMotion>
   )
 }
 
