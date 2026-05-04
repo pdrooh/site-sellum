@@ -3,6 +3,9 @@
  * Em deploy serverless (ex.: Vercel), o filesystem é efêmero — habilite apenas em self-hosted
  * ou defina ALLOW_BLOG_FS_ADMIN=true com storage persistente montado.
  */
+import { hasSupabaseAdmin } from '@/lib/supabase/env'
+
 export function canWriteAdminFilesystem() {
+  if (hasSupabaseAdmin()) return true
   return process.env.NODE_ENV === 'development' || process.env.ALLOW_BLOG_FS_ADMIN === 'true'
 }

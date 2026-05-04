@@ -1,17 +1,19 @@
 import { NextResponse } from 'next/server'
 import { promises as fs } from 'fs'
 import path from 'path'
-import { getAllPostsMeta, blogDir } from '@/lib/blog'
+import { getAllPostsMetaAdmin, blogDir } from '@/lib/blog'
 import { buildMarkdownFile } from '@/lib/blog/write'
 import type { BlogFrontmatter } from '@/lib/blog/types'
 import { canWriteAdminFilesystem } from '@/lib/admin/fs-access'
 import { verifyAdminSession } from '@/lib/admin/session'
+import { hasSupabaseAdmin } from '@/lib/supabase/env'
+import { createSupabaseAdminClient } from '@/lib/supabase/admin'
 
 export async function GET() {
   if (!(await verifyAdminSession())) {
     return NextResponse.json({ error: 'Não autorizado.' }, { status: 401 })
   }
-  const posts = await getAllPostsMeta()
+  const posts = await getAllPostsMetaAdmin()
   return NextResponse.json({ posts })
 }
 
@@ -19,6 +21,68 @@ export async function POST(request: Request) {
   if (!(await verifyAdminSession())) {
     return NextResponse.json({ error: 'Não autorizado.' }, { status: 401 })
   }
+
+  if (hasSupabaseAdmin()) {
+    let body: {
+      slug?: string
+      title?: string
+      description?: string
+      publishedAt?: string
+      author?: string
+      authorRole?: string
+      category?: string
+      image?: string
+      index?: boolean
+      content?: string
+    } = {}
+
+    try {
+      body = (await request.json()) as typeof body
+    } catch {
+      return NextResponse.json({ error: 'JSON inválido.' }, { status: 400 })
+    }
+
+    const slug = String(body.slug ?? '')
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
+      return NextResponse.json({ error: 'Slug inválido (use letras minúsculas, números e hífens).' }, { status: 400 })
+    }
+
+    const title = String(body.title ?? '').trim()
+    const description = String(body.description ?? '').trim()
+    const content = String(body.content ?? '')
+    const publishedAt = String(body.publishedAt ?? new Date().toISOString())
+    const author = String(body.author ?? 'Sellum').trim()
+
+    if (!title || !description) {
+      return NextResponse.json({ error: 'Título e descrição são obrigatórios.' }, { status: 400 })
+    }
+
+    const supabase = createSupabaseAdminClient()
+    const { data: existing, error: findErr } = await supabase.from('blog_posts').select('slug').eq('slug', slug).maybeSingle()
+    if (findErr) return NextResponse.json({ error: findErr.message }, { status: 500 })
+    if (existing) return NextResponse.json({ error: 'Já existe um artigo com este slug.' }, { status: 409 })
+
+    const { error: insErr } = await supabase.from('blog_posts').insert({
+      slug,
+      title,
+      description,
+      published_at: new Date(publishedAt).toISOString(),
+      updated_at: null,
+      author,
+      author_role: body.authorRole ? String(body.authorRole) : null,
+      category: body.category ? String(body.category) : null,
+      image: body.image ? String(body.image) : null,
+      index: body.index !== false,
+      content_md: content,
+    })
+    if (insErr) return NextResponse.json({ error: insErr.message }, { status: 500 })
+
+    return NextResponse.json({ ok: true, slug })
+  }
+
   if (!canWriteAdminFilesystem()) {
     return NextResponse.json(
       {

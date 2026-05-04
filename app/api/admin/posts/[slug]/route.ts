@@ -4,11 +4,27 @@ import path from 'path'
 import { blogDir } from '@/lib/blog'
 import { canWriteAdminFilesystem } from '@/lib/admin/fs-access'
 import { verifyAdminSession } from '@/lib/admin/session'
+import { hasSupabaseAdmin } from '@/lib/supabase/env'
+import { createSupabaseAdminClient } from '@/lib/supabase/admin'
 
 export async function DELETE(_request: Request, context: { params: Promise<{ slug: string }> }) {
   if (!(await verifyAdminSession())) {
     return NextResponse.json({ error: 'Não autorizado.' }, { status: 401 })
   }
+
+  if (hasSupabaseAdmin()) {
+    const { slug } = await context.params
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
+      return NextResponse.json({ error: 'Slug inválido.' }, { status: 400 })
+    }
+
+    const supabase = createSupabaseAdminClient()
+    const { data, error } = await supabase.from('blog_posts').delete().eq('slug', slug).select('slug').maybeSingle()
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+    if (!data) return NextResponse.json({ error: 'Artigo não encontrado.' }, { status: 404 })
+    return NextResponse.json({ ok: true })
+  }
+
   if (!canWriteAdminFilesystem()) {
     return NextResponse.json(
       {

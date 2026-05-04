@@ -1,11 +1,11 @@
 import Link from 'next/link'
-import { getAllPostsMeta } from '@/lib/blog'
+import { getAllPostsMetaAdmin } from '@/lib/blog'
 import { AdminDeletePostButton } from '@/components/admin/AdminDeletePostButton'
 import { canWriteAdminFilesystem } from '@/lib/admin/fs-access'
 import { AdminFilesystemBanner } from '@/components/admin/AdminFilesystemBanner'
 
 export default async function AdminArtigosPage() {
-  const posts = await getAllPostsMeta()
+  const posts = await getAllPostsMetaAdmin()
   const canWrite = canWriteAdminFilesystem()
 
   return (
