@@ -5,6 +5,8 @@ import { Footer } from '@/components/landing/sections/Footer'
 import { BlogPostList } from '@/components/blog/BlogPostList'
 import { getIndexedPostsMeta } from '@/lib/blog'
 
+export const revalidate = 60
+
 export const metadata: Metadata = {
   title: 'Blog',
   description:

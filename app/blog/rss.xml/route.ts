@@ -2,6 +2,8 @@ import { getIndexedPostsMeta } from '@/lib/blog'
 
 const site = 'https://sellum.app'
 
+export const revalidate = 60
+
 function escapeXml(text: string) {
   return text
     .replace(/&/g, '&amp;')
