@@ -4,6 +4,8 @@ import { AdminLogoutButton } from '@/components/admin/AdminLogoutButton'
 import { AdminSidebarNav } from '@/components/admin/AdminSidebarNav'
 import { AdminMobileNav } from '@/components/admin/AdminMobileNav'
 
+export const dynamic = 'force-dynamic'
+
 export default function AdminDashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative min-h-screen bg-[#09090b]">
