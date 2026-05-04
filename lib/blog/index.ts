@@ -41,12 +41,16 @@ function parseFrontmatter(data: Record<string, unknown>): BlogFrontmatter {
 
 export async function getPostSlugs(): Promise<string[]> {
   if (hasSupabase()) {
-    const supabase = createSupabaseServerClient()
-    const { data, error } = await supabase.from('blog_posts').select('slug').eq('index', true).order('published_at', {
-      ascending: false,
-    })
-    if (error) throw new Error(error.message)
-    return (data ?? []).map((r) => String(r.slug))
+    try {
+      const supabase = createSupabaseServerClient()
+      const { data, error } = await supabase.from('blog_posts').select('slug').eq('index', true).order('published_at', {
+        ascending: false,
+      })
+      if (error) return []
+      return (data ?? []).map((r) => String(r.slug))
+    } catch {
+      return []
+    }
   }
 
   try {
@@ -63,30 +67,34 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) return null
 
   if (hasSupabase()) {
-    const supabase = createSupabaseServerClient()
-    const { data, error } = await supabase
-      .from('blog_posts')
-      .select('slug,title,description,published_at,updated_at,author,author_role,category,image,index,content_md')
-      .eq('slug', slug)
-      .eq('index', true)
-      .maybeSingle()
+    try {
+      const supabase = createSupabaseServerClient()
+      const { data, error } = await supabase
+        .from('blog_posts')
+        .select('slug,title,description,published_at,updated_at,author,author_role,category,image,index,content_md')
+        .eq('slug', slug)
+        .eq('index', true)
+        .maybeSingle()
 
-    if (error) throw new Error(error.message)
-    if (!data) return null
-    const content = String((data as any).content_md ?? '')
-    return {
-      slug: String(data.slug),
-      title: String(data.title),
-      description: String(data.description),
-      publishedAt: new Date(String((data as any).published_at)).toISOString(),
-      updatedAt: (data as any).updated_at ? new Date(String((data as any).updated_at)).toISOString() : undefined,
-      author: String((data as any).author ?? 'Sellum'),
-      authorRole: (data as any).author_role ? String((data as any).author_role) : undefined,
-      category: (data as any).category ? String((data as any).category) : undefined,
-      image: (data as any).image ? String((data as any).image) : undefined,
-      index: (data as any).index !== false,
-      readingTimeMinutes: readingTimeFromText(content),
-      content,
+      if (error) return null
+      if (!data) return null
+      const content = String((data as any).content_md ?? '')
+      return {
+        slug: String(data.slug),
+        title: String(data.title),
+        description: String(data.description),
+        publishedAt: new Date(String((data as any).published_at)).toISOString(),
+        updatedAt: (data as any).updated_at ? new Date(String((data as any).updated_at)).toISOString() : undefined,
+        author: String((data as any).author ?? 'Sellum'),
+        authorRole: (data as any).author_role ? String((data as any).author_role) : undefined,
+        category: (data as any).category ? String((data as any).category) : undefined,
+        image: (data as any).image ? String((data as any).image) : undefined,
+        index: (data as any).index !== false,
+        readingTimeMinutes: readingTimeFromText(content),
+        content,
+      }
+    } catch {
+      return null
     }
   }
 
@@ -110,29 +118,33 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
 export async function getAllPostsMeta(): Promise<BlogPostMeta[]> {
   // Em Supabase, por padrão retorna apenas posts indexáveis (públicos).
   if (hasSupabase()) {
-    const supabase = createSupabaseServerClient()
-    const { data, error } = await supabase
-      .from('blog_posts')
-      .select('slug,title,description,published_at,updated_at,author,author_role,category,image,index,content_md')
-      .eq('index', true)
-      .order('published_at', { ascending: false })
-    if (error) throw new Error(error.message)
-    return (data ?? []).map((row: any) => {
-      const content = String(row.content_md ?? '')
-      return {
-        slug: String(row.slug),
-        title: String(row.title),
-        description: String(row.description),
-        publishedAt: new Date(String(row.published_at)).toISOString(),
-        updatedAt: row.updated_at ? new Date(String(row.updated_at)).toISOString() : undefined,
-        author: String(row.author ?? 'Sellum'),
-        authorRole: row.author_role ? String(row.author_role) : undefined,
-        category: row.category ? String(row.category) : undefined,
-        image: row.image ? String(row.image) : undefined,
-        index: row.index !== false,
-        readingTimeMinutes: readingTimeFromText(content),
-      }
-    })
+    try {
+      const supabase = createSupabaseServerClient()
+      const { data, error } = await supabase
+        .from('blog_posts')
+        .select('slug,title,description,published_at,updated_at,author,author_role,category,image,index,content_md')
+        .eq('index', true)
+        .order('published_at', { ascending: false })
+      if (error) return []
+      return (data ?? []).map((row: any) => {
+        const content = String(row.content_md ?? '')
+        return {
+          slug: String(row.slug),
+          title: String(row.title),
+          description: String(row.description),
+          publishedAt: new Date(String(row.published_at)).toISOString(),
+          updatedAt: row.updated_at ? new Date(String(row.updated_at)).toISOString() : undefined,
+          author: String(row.author ?? 'Sellum'),
+          authorRole: row.author_role ? String(row.author_role) : undefined,
+          category: row.category ? String(row.category) : undefined,
+          image: row.image ? String(row.image) : undefined,
+          index: row.index !== false,
+          readingTimeMinutes: readingTimeFromText(content),
+        }
+      })
+    } catch {
+      return []
+    }
   }
 
   const slugs = await getPostSlugs()
@@ -158,28 +170,32 @@ export async function getIndexedPostsMeta(): Promise<BlogPostMeta[]> {
 
 export async function getAllPostsMetaAdmin(): Promise<BlogPostMeta[]> {
   if (hasSupabaseAdmin()) {
-    const supabase = createSupabaseAdminClient()
-    const { data, error } = await supabase
-      .from('blog_posts')
-      .select('slug,title,description,published_at,updated_at,author,author_role,category,image,index,content_md')
-      .order('published_at', { ascending: false })
-    if (error) throw new Error(error.message)
-    return (data ?? []).map((row: any) => {
-      const content = String(row.content_md ?? '')
-      return {
-        slug: String(row.slug),
-        title: String(row.title),
-        description: String(row.description),
-        publishedAt: new Date(String(row.published_at)).toISOString(),
-        updatedAt: row.updated_at ? new Date(String(row.updated_at)).toISOString() : undefined,
-        author: String(row.author ?? 'Sellum'),
-        authorRole: row.author_role ? String(row.author_role) : undefined,
-        category: row.category ? String(row.category) : undefined,
-        image: row.image ? String(row.image) : undefined,
-        index: row.index !== false,
-        readingTimeMinutes: readingTimeFromText(content),
-      }
-    })
+    try {
+      const supabase = createSupabaseAdminClient()
+      const { data, error } = await supabase
+        .from('blog_posts')
+        .select('slug,title,description,published_at,updated_at,author,author_role,category,image,index,content_md')
+        .order('published_at', { ascending: false })
+      if (error) return []
+      return (data ?? []).map((row: any) => {
+        const content = String(row.content_md ?? '')
+        return {
+          slug: String(row.slug),
+          title: String(row.title),
+          description: String(row.description),
+          publishedAt: new Date(String(row.published_at)).toISOString(),
+          updatedAt: row.updated_at ? new Date(String(row.updated_at)).toISOString() : undefined,
+          author: String(row.author ?? 'Sellum'),
+          authorRole: row.author_role ? String(row.author_role) : undefined,
+          category: row.category ? String(row.category) : undefined,
+          image: row.image ? String(row.image) : undefined,
+          index: row.index !== false,
+          readingTimeMinutes: readingTimeFromText(content),
+        }
+      })
+    } catch {
+      return []
+    }
   }
   return await getAllPostsMeta()
 }
